@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  firstName     String
+  secondName    String
+  email         String         @unique
+  password      String
+  createdAt     DateTime       @default(now())
+  refreshTokens RefreshToken[]
+  urlChecks     UrlCheck[]
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  tokenHash String   @unique
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model UrlCheck {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  url         String
+  isSafe      Boolean
+  status      String
+  threatTypes String[]
+  checkedAt   DateTime @default(now())
+
+  // One entry per link for each user. Checking the same link again updates this entry.
+  @@unique([userId, url])
+  @@index([userId, checkedAt])
+}

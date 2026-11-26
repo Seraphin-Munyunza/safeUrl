@@ -1,0 +1,40 @@
+/* Extra styles used only by the profile page. The colours come from style.css */
+
+.profile-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.8rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 30px rgba(20, 33, 61, 0.06);
+}
+
+.profile-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.form-success {
+  color: var(--good);
+  background: var(--good-bg);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.field-readonly {
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.field-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0.35rem 0 0;
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 1.4rem 1.2rem;
+  }
+}
